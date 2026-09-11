@@ -7,5 +7,5 @@ WORKDIR /app
 # Copies local code into the container's working directory "." for execution
 COPY auditor.py .
 
-CMD ["python"."auditor.py"]
+CMD ["python","auditor.py"]
 
