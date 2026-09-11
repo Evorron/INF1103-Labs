@@ -13,3 +13,7 @@ while True:
             failed_rejected += 1
             print("Error")
             continue
+
+    else:
+        inventory += int(count)
+        print(inventory)
