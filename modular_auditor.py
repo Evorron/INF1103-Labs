@@ -1,9 +1,24 @@
 # Functions
-def get_valid_input(): # Input Validation
+def get_valid_input(): # Input prompt and Validation
     # Prompts and retrieves user input
-    # Check input for "quit" -> Returns "quit" signal if True
-    # Checks if user input is a valid integer -> Returns the integer value if True
-    return
+    user_input = input("Enter stock quantity: ")
+
+    # Exit condition
+    if user_input.lower() == "quit":
+        return user_input.lower()
+    
+    # Checks invalid inputs
+    if not user_input.isdigit() or user_input == "":
+        print("ERROR: Enter a valid integer")
+        return None
+
+    if int(user_input) < 0:
+        print("ERROR: Only positive numbers are allowed")
+        return None
+
+    else:
+        return int(user_input)
+
 
 def process_delivery(current_total, new_value): # Delivery Calculation
     # 
@@ -22,22 +37,15 @@ inventory = 0
 failed_rejected = 0
 
 while True:
-    count = input("Enter stock quantity: ")
-    # Exit condition
-    if count == "quit":
-        print("Total Units Processed:", inventory)
-        print("Number of Failed/Rejected Entries: ", failed_rejected)
-        break
+    input_value = get_valid_input()
 
-    elif count.isdigit() != True or inventory < 0 or count == "":
-            failed_rejected += 1
-            print("Error")
-            continue
+    # if 
 
-    else:
-        inventory += int(count)
-        print(inventory)
 
-        if inventory > 500:
-            print("Overstock alert")
-            break
+    # else:
+    #     inventory += int(count)
+    #     print(inventory)
+
+    #     if inventory > 500:
+    #         print("Overstock alert")
+    #         break
