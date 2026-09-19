@@ -25,6 +25,12 @@ def process_delivery(current_total, new_value): # Delivery amount calculation
 def calculate_tax(amount):  # Calculates tax for the current delivery amount
     return amount * 0.10
 
+def delivery_details(delivery_amount, tax_amount, current_total, current_processed): # Display's current delivery information (NOT LAB SPECIFC FUNCTION)
+    print("Delivery Amount: ", delivery_amount)
+    print("Tax: ", tax_amount)
+    print("Current Inventory: ", current_total)
+    print("Deliveries Processed: ", current_processed)
+
 def generate_report(total_units, failed_attempts):
     print("\n-------Final Summary-------")
     print("Total Delivery Processed:", total_units)
@@ -52,5 +58,7 @@ while True:
 
     # Adds delivery amount to total inventory
     total_inventory = process_delivery(total_inventory, input_value)
-
+    tax = calculate_tax(input_value)
     deliveries_processed += 1
+
+    delivery_details(input_value, tax, total_inventory, deliveries_processed)
