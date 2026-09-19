@@ -1,3 +1,17 @@
+# Functions
+def get_valid_input(): # Input Handling
+    return
+
+def process_delivery(current_total, new_value): # Delivery Calculation
+    return
+
+def calculate_tax(amount):
+    return
+
+def generate_report(total_units, failed_attempts):
+    return
+
+
 inventory = 0
 failed_rejected = 0
 
