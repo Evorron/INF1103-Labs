@@ -1,14 +1,20 @@
 # Functions
-def get_valid_input(): # Input Handling
+def get_valid_input(): # Input Validation
+    # Prompts and retrieves user input
+    # Check input for "quit" -> Returns "quit" signal if True
+    # Checks if user input is a valid integer -> Returns the integer value if True
     return
 
 def process_delivery(current_total, new_value): # Delivery Calculation
+    # 
     return
 
 def calculate_tax(amount):
     return
 
 def generate_report(total_units, failed_attempts):
+    # Function takes in total inventory and failed/rejected attempts
+    # Function returns the two values via print
     return
 
 
