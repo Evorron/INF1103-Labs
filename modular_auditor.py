@@ -22,10 +22,8 @@ def get_valid_input(): # Input prompt and Validation
 def process_delivery(current_total, new_value): # Delivery amount calculation
     return current_total + new_value
 
-def calculate_tax(amount):
-    # Takes in deliver value. Calculation of 10% performed
-    # Calculation results is returned
-    return
+def calculate_tax(amount):  # Calculates tax for the current delivery amount
+    return amount * 0.10
 
 def generate_report(total_units, failed_attempts):
     print("\n-------Final Summary-------")
@@ -48,11 +46,11 @@ while True:
         failed_rejected += 1
         continue
 
+    if total_inventory > 500:
+        print("OVERSTOCK ALERT")
+        break
+
     # Adds delivery amount to total inventory
     total_inventory = process_delivery(total_inventory, input_value)
 
     deliveries_processed += 1
-
-    if total_inventory > 500:
-            print("OVERSTOCK ALERT")
-            break
