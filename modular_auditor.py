@@ -29,17 +29,25 @@ def calculate_tax(amount):
 
 def generate_report(total_units, failed_attempts):
     # Function takes in total inventory and failed/rejected attempts
+    print("Total Units Processed:", total_units)
+    print("Number of Failed/Rejected Entries: ", failed_attempts)
     # Function returns the two values via print
     return
 
 
-inventory = 0
+total_inventory = 0
 failed_rejected = 0
 
 while True:
     input_value = get_valid_input()
 
-    # if 
+    if input_value == "quit":
+        generate_report(total_inventory, failed_rejected)
+        break
+
+    if input_value == None:
+        failed_rejected += 1
+        continue
 
 
     # else:
