@@ -49,11 +49,8 @@ while True:
     # Adds delivery amount to total inventory
     total_inventory = process_delivery(total_inventory, input_value)
 
+    deliveries_processed += 1
 
-    # else:
-    #     inventory += int(count)
-    #     print(inventory)
-
-    #     if inventory > 500:
-    #         print("Overstock alert")
-    #         break
+    if total_inventory > 500:
+            print("OVERSTOCK ALERT")
+            break
