@@ -1,7 +1,9 @@
-# Functions
-def get_valid_input(): # Input prompt and Validation
+# ------Functions------
+# Input prompt and Validation
+def get_valid_input():
     # Prompts and retrieves user input
     user_input = input("Enter stock quantity: ")
+    print("------------------")
 
     # Exit condition
     if user_input.lower() == "quit":
@@ -10,27 +12,34 @@ def get_valid_input(): # Input prompt and Validation
     # Checks invalid inputs
     if not user_input.isdigit() or user_input == "":
         print("ERROR: Enter a valid integer")
+        print("------------------")
         return None
 
     if int(user_input) < 0:
         print("ERROR: Only positive numbers are allowed")
+        print("------------------")
         return None
 
     else:
         return int(user_input)
 
-def process_delivery(current_total, new_value): # Delivery amount calculation
+# Delivery amount calculation
+def process_delivery(current_total, new_value): 
     return current_total + new_value
 
-def calculate_tax(amount):  # Calculates tax for the current delivery amount
+# Calculates tax for the current delivery amount
+def calculate_tax(amount):
     return amount * 0.10
 
-def delivery_details(delivery_amount, tax_amount, current_total, current_processed): # Display's current delivery information (NOT LAB SPECIFC FUNCTION)
+# Display's current delivery information (NOT LAB SPECIFC FUNCTION)
+def delivery_details(delivery_amount, tax_amount, current_total, current_processed): 
     print("Delivery Amount: ", delivery_amount)
     print("Tax: ", tax_amount)
     print("Current Inventory: ", current_total)
     print("Deliveries Processed: ", current_processed)
+    print("------------------")
 
+# Displays final summary
 def generate_report(total_units, failed_attempts):
     print("\n-------Final Summary-------")
     print("Total Delivery Processed:", total_units)
