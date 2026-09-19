@@ -23,6 +23,8 @@ def process_delivery(current_total, new_value): # Delivery amount calculation
     return current_total + new_value
 
 def calculate_tax(amount):
+    # Takes in deliver value. Calculation of 10% performed
+    # Calculation results is returned
     return
 
 def generate_report(total_units, failed_attempts):
