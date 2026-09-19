@@ -19,7 +19,7 @@ def get_valid_input(): # Input prompt and Validation
     else:
         return int(user_input)
 
-def process_delivery(current_total, new_value): # Delivery Calculation
+def process_delivery(current_total, new_value): # Delivery amount calculation
     return current_total + new_value
 
 def calculate_tax(amount):
@@ -33,6 +33,7 @@ def generate_report(total_units, failed_attempts):
 
 total_inventory = 0
 failed_rejected = 0
+deliveries_processed = 0
 
 while True:
     input_value = get_valid_input()
@@ -45,6 +46,7 @@ while True:
         failed_rejected += 1
         continue
 
+    # Adds delivery amount to total inventory
     total_inventory = process_delivery(total_inventory, input_value)
 
 
