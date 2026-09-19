@@ -21,7 +21,8 @@ def get_valid_input(): # Input prompt and Validation
 
 
 def process_delivery(current_total, new_value): # Delivery Calculation
-    # 
+    # Takes in current stock total and new value entered by user
+    # Returns the added values
     return
 
 def calculate_tax(amount):
