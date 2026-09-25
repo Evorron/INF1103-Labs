@@ -69,13 +69,11 @@ def load_inventory():
         for line in current_inventory.splitlines():
             # Checks the current order ID in inventory.txt
             order_id = int(line.split(",")[0])
+            # Sets the next available ID for use
+            highest_id = order_id + 1
 
             # Sums total inventory quantity
             total_quantity += int(line.split(",")[2])
-
-            # Sets the next available ID for use
-            if order_id > highest_id:
-                highest_id = order_id + 1
 
        
 
@@ -101,7 +99,7 @@ while True:
     if user_input == "quit":
         print("Order successfully saved to inventory.txt")
         save_inventory(orders)
-        generate_report(total_quantity , failed_rejected)
+        generate_report(deliveries_processed, failed_rejected)
         break
 
     if user_input == None:
@@ -118,8 +116,8 @@ while True:
     order_id += 1
 
     # Adds delivery amount to total inventory
-    # total_inventory = process_delivery(total_inventory, quantity)
-    # tax = calculate_tax(input_value)
+    tax = calculate_tax(quantity)
     deliveries_processed += 1
+    total_quantity += quantity
 
-    # delivery_details(input_value, tax, total_inventory, deliveries_processed)
+    delivery_details(quantity, tax, total_quantity, deliveries_processed)
