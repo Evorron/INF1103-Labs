@@ -21,7 +21,7 @@ def get_valid_input():
         quantity_input = input("Enter Quantity: ")
 
         # Checks invalid inputs
-        if not quantity_input.isdigit() or product_input == "":
+        if not quantity_input.isdigit() or quantity_input == "":
             print("ERROR: Enter a valid integer")
             print("------------------")
             return None
@@ -32,7 +32,7 @@ def get_valid_input():
             return None
 
         else:
-            return product_input, quantity_input
+            return product_input, int(quantity_input)
 
 # Delivery amount calculation
 def process_delivery(current_total, new_value): 
@@ -59,7 +59,7 @@ def generate_report(total_units, failed_attempts):
 # Load inventory file
 def load_inventory():
     # Opens inventory.txt file if it exists, else creates it
-    with open("inventory.txt", "r") as file:
+    with open("inventory.txt", "a+") as file:
         file.seek(0)
         current_inventory = file.read()
     return current_inventory
@@ -69,7 +69,7 @@ def save_inventory(orders):
     # Each quantity entered stored onto a list
     with open("inventory.txt", "a") as file:
         for order in orders:
-                file.write(f"\n{order[0]}, {order[1]}, {order[2]}")
+                file.write(f"{order[0]}, {order[1]}, {order[2]}\n")
 
 orders = []
 total_inventory = 0
@@ -97,10 +97,10 @@ while True:
 
     product, quantity = user_input
     orders.append([100, product, quantity])
-    print(f"New Order Added:\n{100}, {product}, {quantity}")
+    print(f"\nNew Order Added:\n{100}, {product}, {quantity}\n")
 
     # Adds delivery amount to total inventory
-    # total_inventory = process_delivery(total_inventory, input_value)
+    # total_inventory = process_delivery(total_inventory, quantity)
     # tax = calculate_tax(input_value)
     deliveries_processed += 1
 
