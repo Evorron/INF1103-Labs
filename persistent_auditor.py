@@ -47,10 +47,16 @@ def generate_report(total_units, failed_attempts):
 
 # Load inventory file
 def load_inventory():
+    # Opens inventory.txt file if it exists, else creates it
+    # Reads data stored on the file
     pass
 
 # Saves inventory
 def save_inventory():
+    # Each product entered stored onto a list
+    # List format [ID, Product Name, Quantity]
+    # Repeat items should be added to the same list
+    # Upon saving, all list items saved into inventory.txt
     pass
 
 
