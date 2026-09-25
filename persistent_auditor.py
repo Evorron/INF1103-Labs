@@ -2,31 +2,37 @@
 # Input prompt and Validation
 def get_valid_input():
     # Prompts and retrieves user input
-    product = input("Enter Product Name: ")
-    # Exit condition
-    if product.lower() == "quit":
-        return product.lower()
-    
-    if product.isdigit() or product == "":
-        print("ERROR: Enter a valid product name")
-        print("------------------")
-        return None
+    while True:
+        product_input = input("Enter Product Name: ")
+        
+        # Exit condition
+        if product_input.lower() == "quit":
+            return product_input.lower()
+        
+        # Checks invalid inputs
+        if product_input.isdigit() or product_input == "":
+            print("ERROR: Enter a product name")
+            print("------------------")
+            return None
 
-    quantity = input("Enter Quantity: ")
-    
-    # Checks invalid inputs
-    if not quantity.isdigit() or quantity == "":
-        print("ERROR: Enter a valid integer")
-        print("------------------")
-        return None
+        break
 
-    if int(quantity) < 0:
-        print("ERROR: Only positive numbers are allowed")
-        print("------------------")
-        return None
+    while True:
+        quantity_input = input("Enter Quantity: ")
 
-    else:
-        return product, int(quantity)
+        # Checks invalid inputs
+        if not quantity_input.isdigit() or product_input == "":
+            print("ERROR: Enter a valid integer")
+            print("------------------")
+            return None
+
+        if int(quantity_input) < 0:
+            print("ERROR: Only positive numbers are allowed")
+            print("------------------")
+            return None
+
+        else:
+            return product_input, quantity_input
 
 # Delivery amount calculation
 def process_delivery(current_total, new_value): 
@@ -59,28 +65,30 @@ def load_inventory():
     return current_inventory
 
 # Saves inventory
-def save_inventory():
+def save_inventory(orders):
     # Each quantity entered stored onto a list
+    with open("inventory.txt", "a") as file:
+        file.write(orders)
     # List format [ID, quantity Name, Quantity]
     # Repeat items should be added to the same list
     # Upon saving, all list items saved into inventory.txt
-    pass
+        pass
 
 orders = []
 total_inventory = 0
 failed_rejected = 0
 deliveries_processed = 0
 
+print(f"Current Orders: \n\n\n{load_inventory()}\n\n")
 
 while True:
-    load_inventory()
-    input_value = get_valid_input()
+    user_input = get_valid_input()
 
-    if input_value == "quit":
+    if user_input == "quit":
         generate_report(total_inventory, failed_rejected)
         break
 
-    if input_value == None:
+    if user_input == None:
         failed_rejected += 1
         continue
 
@@ -88,9 +96,15 @@ while True:
         print("OVERSTOCK ALERT")
         break
 
+    product, quantity = user_input
+    orders.append([100, product, quantity])
+    print(f"New Order Added:\n{100}, {product}, {quantity}")
+
+    print(orders)
+
     # Adds delivery amount to total inventory
-    total_inventory = process_delivery(total_inventory, input_value)
-    tax = calculate_tax(input_value)
+    # total_inventory = process_delivery(total_inventory, input_value)
+    # tax = calculate_tax(input_value)
     deliveries_processed += 1
 
-    delivery_details(input_value, tax, total_inventory, deliveries_processed)
+    # delivery_details(input_value, tax, total_inventory, deliveries_processed)
