@@ -45,6 +45,14 @@ def generate_report(total_units, failed_attempts):
     print("Total Delivery Processed:", total_units)
     print("Number of Failed/Rejected Entries: ", failed_attempts)
 
+# Load inventory file
+def load_inventory():
+    pass
+
+# Saves inventory
+def save_inventory():
+    pass
+
 
 total_inventory = 0
 failed_rejected = 0
