@@ -60,20 +60,26 @@ def generate_report(total_units, failed_attempts):
 def load_inventory():
     # Sets the default starting ID
     highest_id = 1001
+    total_quantity = 0
     with open("inventory.txt", "a+") as file:
         file.seek(0)
         # Reads contents of inventory.txt
         current_inventory = file.read()
 
-        # Checks the current order ID
         for line in current_inventory.splitlines():
+            # Checks the current order ID in inventory.txt
             order_id = int(line.split(",")[0])
+
+            # Sums total inventory quantity
+            total_inventory += int(line.split(",")[2])
 
             # Sets the next available ID for use
             if order_id > highest_id:
-                highest_id = order_id
+                highest_id = order_id + 1
 
-    return current_inventory, highest_id
+       
+
+    return current_inventory, highest_id, total_quantity
 
 # Saves inventory
 def save_inventory(orders):
@@ -83,12 +89,11 @@ def save_inventory(orders):
                 file.write(f"{order[0]}, {order[1]}, {order[2]}\n")
 
 orders = []
-order_id = load_inventory()[1]
-total_inventory = 0
+current_inventory, order_id, total_quantity = load_inventory() # Unpack load_inventory()
 failed_rejected = 0
 deliveries_processed = 0
 
-print(f"Current Orders: \n\n\n{load_inventory()[0]}\n\n")
+print(f"Current Orders: \n\n\n{current_inventory}\n")
 
 while True:
     user_input = get_valid_input()
@@ -96,14 +101,14 @@ while True:
     if user_input == "quit":
         print("Order successfully saved to inventory.txt")
         save_inventory(orders)
-        generate_report(total_inventory, failed_rejected)
+        generate_report(total_quantity , failed_rejected)
         break
 
     if user_input == None:
         failed_rejected += 1
         continue
 
-    if total_inventory > 500:
+    if total_quantity > 500:
         print("OVERSTOCK ALERT")
         break
 
