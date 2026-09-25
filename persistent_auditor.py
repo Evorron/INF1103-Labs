@@ -71,7 +71,7 @@ def load_inventory():
             order_id = int(line.split(",")[0])
 
             # Sums total inventory quantity
-            total_inventory += int(line.split(",")[2])
+            total_quantity += int(line.split(",")[2])
 
             # Sets the next available ID for use
             if order_id > highest_id:
