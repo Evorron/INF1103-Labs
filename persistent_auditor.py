@@ -58,11 +58,22 @@ def generate_report(total_units, failed_attempts):
 
 # Load inventory file
 def load_inventory():
-    # Opens inventory.txt file if it exists, else creates it
+    # Sets the default starting ID
+    highest_id = 1001
     with open("inventory.txt", "a+") as file:
         file.seek(0)
+        # Reads contents of inventory.txt
         current_inventory = file.read()
-    return current_inventory
+
+        # Checks the current order ID
+        for line in current_inventory.splitlines():
+            order_id = int(line.split(",")[0])
+
+            # Sets the next available ID for use
+            if order_id > highest_id:
+                highest_id = order_id
+
+    return current_inventory, highest_id
 
 # Saves inventory
 def save_inventory(orders):
@@ -72,11 +83,12 @@ def save_inventory(orders):
                 file.write(f"{order[0]}, {order[1]}, {order[2]}\n")
 
 orders = []
+order_id = load_inventory()[1]
 total_inventory = 0
 failed_rejected = 0
 deliveries_processed = 0
 
-print(f"Current Orders: \n\n\n{load_inventory()}\n\n")
+print(f"Current Orders: \n\n\n{load_inventory()[0]}\n\n")
 
 while True:
     user_input = get_valid_input()
@@ -96,8 +108,9 @@ while True:
         break
 
     product, quantity = user_input
-    orders.append([100, product, quantity])
-    print(f"\nNew Order Added:\n{100}, {product}, {quantity}\n")
+    orders.append([order_id, product, quantity])
+    print(f"\nNew Order Added:\n{order_id}, {product}, {quantity}\n")
+    order_id += 1
 
     # Adds delivery amount to total inventory
     # total_inventory = process_delivery(total_inventory, quantity)
