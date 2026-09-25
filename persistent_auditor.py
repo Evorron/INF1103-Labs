@@ -48,8 +48,10 @@ def generate_report(total_units, failed_attempts):
 # Load inventory file
 def load_inventory():
     # Opens inventory.txt file if it exists, else creates it
-    # Reads data stored on the file
-    pass
+    with open("inventory.txt", "r") as file:
+        file.seek(0)
+        current_inventory = file.read()
+    return current_inventory
 
 # Saves inventory
 def save_inventory():
@@ -59,12 +61,12 @@ def save_inventory():
     # Upon saving, all list items saved into inventory.txt
     pass
 
-
 total_inventory = 0
 failed_rejected = 0
 deliveries_processed = 0
 
 while True:
+    load_inventory()
     input_value = get_valid_input()
 
     if input_value == "quit":
