@@ -68,11 +68,8 @@ def load_inventory():
 def save_inventory(orders):
     # Each quantity entered stored onto a list
     with open("inventory.txt", "a") as file:
-        file.write(orders)
-    # List format [ID, quantity Name, Quantity]
-    # Repeat items should be added to the same list
-    # Upon saving, all list items saved into inventory.txt
-        pass
+        for order in orders:
+                file.write(f"\n{order[0]}, {order[1]}, {order[2]}")
 
 orders = []
 total_inventory = 0
@@ -85,6 +82,8 @@ while True:
     user_input = get_valid_input()
 
     if user_input == "quit":
+        print("Order successfully saved to inventory.txt")
+        save_inventory(orders)
         generate_report(total_inventory, failed_rejected)
         break
 
@@ -99,8 +98,6 @@ while True:
     product, quantity = user_input
     orders.append([100, product, quantity])
     print(f"New Order Added:\n{100}, {product}, {quantity}")
-
-    print(orders)
 
     # Adds delivery amount to total inventory
     # total_inventory = process_delivery(total_inventory, input_value)
