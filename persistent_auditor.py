@@ -2,26 +2,31 @@
 # Input prompt and Validation
 def get_valid_input():
     # Prompts and retrieves user input
-    user_input = input("Enter stock quantity: ")
-    print("------------------")
-
+    product = input("Enter Product Name: ")
     # Exit condition
-    if user_input.lower() == "quit":
-        return user_input.lower()
+    if product.lower() == "quit":
+        return product.lower()
+    
+    if product.isdigit() or product == "":
+        print("ERROR: Enter a valid product name")
+        print("------------------")
+        return None
+
+    quantity = input("Enter Quantity: ")
     
     # Checks invalid inputs
-    if not user_input.isdigit() or user_input == "":
+    if not quantity.isdigit() or quantity == "":
         print("ERROR: Enter a valid integer")
         print("------------------")
         return None
 
-    if int(user_input) < 0:
+    if int(quantity) < 0:
         print("ERROR: Only positive numbers are allowed")
         print("------------------")
         return None
 
     else:
-        return int(user_input)
+        return product, int(quantity)
 
 # Delivery amount calculation
 def process_delivery(current_total, new_value): 
@@ -55,15 +60,17 @@ def load_inventory():
 
 # Saves inventory
 def save_inventory():
-    # Each product entered stored onto a list
-    # List format [ID, Product Name, Quantity]
+    # Each quantity entered stored onto a list
+    # List format [ID, quantity Name, Quantity]
     # Repeat items should be added to the same list
     # Upon saving, all list items saved into inventory.txt
     pass
 
+orders = []
 total_inventory = 0
 failed_rejected = 0
 deliveries_processed = 0
+
 
 while True:
     load_inventory()
