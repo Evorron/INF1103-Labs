@@ -20,17 +20,22 @@ def add_product():
 # Prompts and retrieves user input
     while True:
         print("\nAdd New Product")
-        product_id = input("Product ID: ")
+        product_id = input("Product ID (e.g. PXXX): ")
         
         # Checks invalid inputs
-        if product_id.isdigit() or product_name == "":
-            print("ERROR: Enter a Product ID (e.g. PXXX)")
+        if product_id.isdigit() or product_id == "":
+            print("ERROR: Enter a valid ID format (e.g. PXXX)")
             print("------------------")
             continue
+
+        if "P" not in product_id or len(product_id) != 4:
+            print("ERROR: Enter a valid ID format (e.g. PXXX)")
+            print("------------------")
+            continue
+
         break
 
     while True:
-        print("\nAdd New Product")
         product_name = input("Product Name: ")
         
         # Checks invalid inputs
@@ -78,7 +83,7 @@ def add_product():
             print("------------------")
             continue
         else:
-            return product_id, product_name, float(price_amt), int(quantity_amt)
+            return product_id, product_name, price_float, int(quantity_amt)
 
 def update_stock():
     product_id_name = input("Enter Product ID/Name: ")
@@ -99,7 +104,13 @@ def search_product():
     
     for product_dict in orders:
         if product_dict["product_name"].lower() or product_dict["product_id"].lower() == product_id_name.lower():
-            print(product_dict)
+            print("Product Found")
+            print("------------------------------------------------")
+            print(f"ID: {product_dict["product_id"]}")
+            print(f"Name: {product_dict["product_name"]}")
+            print(f"Price: ${product_dict["product_price"]:.2f}")
+            print("Stock:", product_dict["product_quantity"])
+            print("------------------------------------------------")
 
 # Load inventory file
 def load_inventory():
