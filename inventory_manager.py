@@ -99,11 +99,12 @@ def add_product():
             return product_id, product_name, price_float, int(quantity_amt)
 
 def update_stock():
+    print("Update Stock")
     product_id_name = input("Enter Product ID/Name: ")
         
     for product_dict in orders:
         if product_dict["product_name"].lower() == product_id_name.lower() or product_dict["product_id"].lower() == product_id_name.lower():
-            print("Product Found:")
+            print("\nProduct Found:")
             print("Name:", product_dict["product_name"])
             print("Current Stock:", product_dict["product_quantity"])
 
@@ -113,6 +114,7 @@ def update_stock():
             print("\nStock updated successfully!")
 
 def search_product():
+    print("Search Product")
     product_id_name = input("Enter Product ID/Name: ")
     
     for product_dict in orders:
@@ -124,6 +126,10 @@ def search_product():
             print(f"Price: ${product_dict["product_price"]:.2f}")
             print("Stock:", product_dict["product_quantity"])
             print("------------------------------------------------")
+
+        else:
+            print("\nProduct not found.")
+            break
 
 def save_inventory():
     print("Saving inventory...")
@@ -143,20 +149,11 @@ def load_inventory():
         with open(inventory_file, "r") as file:
             print("\"inventory.json\" found.")
             print("\"inventory.json\" loaded successfully.")
-            file.seek(0)
-            # Reads contents of inventory.txt
-            current_inventory = file.read()
+            
+            # Load json file
+            data = json.load(file)
 
-            for line in current_inventory.splitlines():
-                # Checks the current order ID in inventory.txt
-                order_id = int(line.split(",")[0])
-                # Sets the next available ID for use
-                highest_id = order_id + 1
-
-                # Sums total inventory quantity
-                total_quantity += int(line.split(",")[2])
-
-        return current_inventory
+        return data
 
     except FileNotFoundError:
         print("File not found")
@@ -165,9 +162,13 @@ def load_inventory():
         with open(inventory_file, "a+") as file:
             print("\"inventory.json\" created.")
 
-orders = []
+        
 
-load_inventory()
+orders = []
+saved_data = load_inventory()
+
+if saved_data:
+    orders = saved_data
 
 while True:
     option = menu_system()
