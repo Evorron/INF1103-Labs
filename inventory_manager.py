@@ -1,3 +1,6 @@
+# Imports
+import json
+
 # Menu
 def menu_system():
    print("\n----------- MENU -----------")
@@ -112,12 +115,15 @@ def search_product():
             print("Stock:", product_dict["product_quantity"])
             print("------------------------------------------------")
 
+def save_inventory():
+    inventory_file = "inventory.json"
+    with open(inventory_file, "w") as json_file:
+        json.dump(orders, json_file, indent=4)
+
 # Load inventory file
 def load_inventory():
     inventory_file = "inventory.json"
     # Sets the default starting ID
-    highest_id = 1001
-    total_quantity = 0
 
     # Checks for existence of "inventory.json"
     try:
@@ -137,7 +143,7 @@ def load_inventory():
                 # Sums total inventory quantity
                 total_quantity += int(line.split(",")[2])
 
-        return current_inventory, highest_id, total_quantity
+        return current_inventory
 
     except FileNotFoundError:
         print("File not found")
@@ -145,8 +151,6 @@ def load_inventory():
 
         with open(inventory_file, "a+") as file:
             print("\"inventory.json\" created.")
-
-        return highest_id, total_quantity
 
 orders = []
 
@@ -166,11 +170,13 @@ while True:
         product_dict["product_quantity"] = quantity
         orders.append(product_dict)
 
-        print("\nProduct added successfully!")
-        print(orders)
+        print("Product added successfully")
 
     if option == 3:
         update_stock()
 
     if option == 4:
         search_product()
+
+    if option == 5:
+        save_inventory()
