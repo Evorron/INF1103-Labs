@@ -69,6 +69,20 @@ def add_product():
         else:
             return product_name, float(price_amt), int(quantity_amt)
 
+def update_stock():
+    product_id_name = input("Enter Product ID/Name: ")
+        
+    for product_dict in orders:
+        if product_dict["product_name"].lower() == product_id_name.lower():
+            print("Product Found:")
+            print("Name:", product_dict["product_name"])
+            print("Current Stock:", product_dict["product_quantity"])
+
+            new_quantity = input("\nNew Stock Quantity: ")
+            product_dict["product_quantity"] = new_quantity
+
+            print("\nStock updated successfully!")
+
 def search_product():
     product_name = input("Enter Product ID/Name: ")
     
@@ -129,7 +143,11 @@ while True:
         product_dict["product_quantity"] = quantity
         orders.append(product_dict)
 
-        print("TEST")
+        print("\nProduct added successfully!")
+        print(orders)
+
+    if option == 3:
+        update_stock()
         print(orders)
 
     if option == 4:
