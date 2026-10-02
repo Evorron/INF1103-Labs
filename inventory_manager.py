@@ -25,7 +25,7 @@ def display_all():
     print("------------------------------------------------")
 
     for product in orders:
-        print(f"ID: {product["product_id"]} | Name: {product["product_name"]} | Price: ${product["product_price"]:.2f} | Stock: {product["product_quantity"]}")
+        print(f"ID: {product['product_id']} | Name: {product['product_name']} | Price: ${product['product_price']:.2f} | Stock: {product['product_quantity']}")
 
     print("------------------------------------------------")
 
@@ -124,10 +124,10 @@ def search_product():
         if product_dict["product_name"].lower() == product_id_name.lower() or product_dict["product_id"].lower() == product_id_name.lower():
             print("\nProduct Found")
             print("------------------------------------------------")
-            print(f"ID: {product_dict["product_id"]}")
-            print(f"Name: {product_dict["product_name"]}")
-            print(f"Price: ${product_dict["product_price"]:.2f}")
-            print("Stock:", product_dict["product_quantity"])
+            print(f"ID: {product_dict['product_id']}")
+            print(f"Name: {product_dict['product_name']}")
+            print(f"Price: ${product_dict['product_price']:.2f}")
+            print("Stock:", product_dict['product_quantity'])
             print("------------------------------------------------")
 
             return 
