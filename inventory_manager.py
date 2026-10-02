@@ -10,10 +10,12 @@ def menu_system():
    print("-----------------------------\n")
 
    option = input("Enter option: ")
-   
-   return int(option)
-    
 
+   if option.isdigit():
+       return int(option)
+   else:
+       print("Enter a valid option")
+       
 def add_product():
 # Prompts and retrieves user input
     while True:
@@ -66,6 +68,13 @@ def add_product():
             continue
         else:
             return product_name, float(price_amt), int(quantity_amt)
+
+def search_product():
+    product_name = input("Enter Product ID/Name: ")
+    
+    for product_dict in orders:
+        if product_dict["product_name"].lower() == product_name.lower():
+            print(product_dict)
 
 # Load inventory file
 def load_inventory():
@@ -120,6 +129,8 @@ while True:
         product_dict["product_quantity"] = quantity
         orders.append(product_dict)
 
-    break
+        print("TEST")
+        print(orders)
 
-print(orders)
+    if option == 4:
+        search_product()
