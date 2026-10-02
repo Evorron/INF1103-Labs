@@ -113,13 +113,16 @@ def update_stock():
 
             print("\nStock updated successfully!")
 
+        
+    print("Product ")
+
 def search_product():
     print("Search Product")
     product_id_name = input("Enter Product ID/Name: ")
     
     for product_dict in orders:
         if product_dict["product_name"].lower() == product_id_name.lower() or product_dict["product_id"].lower() == product_id_name.lower():
-            print("Product Found")
+            print("\nProduct Found")
             print("------------------------------------------------")
             print(f"ID: {product_dict["product_id"]}")
             print(f"Name: {product_dict["product_name"]}")
@@ -127,17 +130,15 @@ def search_product():
             print("Stock:", product_dict["product_quantity"])
             print("------------------------------------------------")
 
-        else:
-            print("\nProduct not found.")
-            break
+            return 
+        
+    print("\nProduct not found.")
+            
 
 def save_inventory():
-    print("Saving inventory...")
     inventory_file = "inventory.json"
     with open(inventory_file, "w") as json_file:
         json.dump(orders, json_file, indent=4)
-
-    print("Inventory saved successfully to \"inventory.json\"")
 
 # Load inventory file
 def load_inventory():
@@ -159,12 +160,18 @@ def load_inventory():
         print("File not found")
         print("Creating \"inventory.json\"")
 
-        with open(inventory_file, "a+") as file:
+        with open(inventory_file, "w") as file:
+            # Empty list saved to ensure created file is a valid JSON file
+            json.dump([], file)
             print("\"inventory.json\" created.")
 
         
 
 orders = []
+
+print("========================================")
+print("INVENTORY MANAGEMENT SYSTEM")
+print("========================================\n")
 saved_data = load_inventory()
 
 if saved_data:
@@ -196,4 +203,15 @@ while True:
         search_product()
 
     if option == 5:
+        print("Saving inventory...")
         save_inventory()
+        print("Inventory saved successfully to \"inventory.json\"")
+
+    if option == 6:
+        print("Saving inventory before exit...")
+        save_inventory()
+        print("Inventory saved successfully.\n")
+        print("Thank you for using Inventory Management System.")
+        print("Program terminated.")
+        break
+
