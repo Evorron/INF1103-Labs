@@ -19,7 +19,16 @@ def menu_system():
        return int(option)
    else:
        print("Enter a valid option")
-       
+
+def display_all():
+    print("Current Inventory")
+    print("------------------------------------------------")
+
+    for product in orders:
+        print(f"ID: {product["product_id"]} | Name: {product["product_name"]} | Price: ${product["product_price"]:.2f} | Stock: {product["product_quantity"]}")
+
+    print("------------------------------------------------")
+
 def add_product():
 # Prompts and retrieves user input
     while True:
@@ -117,9 +126,12 @@ def search_product():
             print("------------------------------------------------")
 
 def save_inventory():
+    print("Saving inventory...")
     inventory_file = "inventory.json"
     with open(inventory_file, "w") as json_file:
         json.dump(orders, json_file, indent=4)
+
+    print("Inventory saved successfully to \"inventory.json\"")
 
 # Load inventory file
 def load_inventory():
@@ -159,6 +171,9 @@ load_inventory()
 
 while True:
     option = menu_system()
+
+    if option == 1:
+        display_all()
 
     if option == 2:
         product_dict = {}
