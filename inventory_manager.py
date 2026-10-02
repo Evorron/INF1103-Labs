@@ -20,6 +20,17 @@ def add_product():
 # Prompts and retrieves user input
     while True:
         print("\nAdd New Product")
+        product_id = input("Product ID: ")
+        
+        # Checks invalid inputs
+        if product_id.isdigit() or product_name == "":
+            print("ERROR: Enter a Product ID (e.g. PXXX)")
+            print("------------------")
+            continue
+        break
+
+    while True:
+        print("\nAdd New Product")
         product_name = input("Product Name: ")
         
         # Checks invalid inputs
@@ -67,13 +78,13 @@ def add_product():
             print("------------------")
             continue
         else:
-            return product_name, float(price_amt), int(quantity_amt)
+            return product_id, product_name, float(price_amt), int(quantity_amt)
 
 def update_stock():
     product_id_name = input("Enter Product ID/Name: ")
         
     for product_dict in orders:
-        if product_dict["product_name"].lower() == product_id_name.lower():
+        if product_dict["product_name"].lower() or product_dict["product_id"].lower() == product_id_name.lower():
             print("Product Found:")
             print("Name:", product_dict["product_name"])
             print("Current Stock:", product_dict["product_quantity"])
@@ -84,10 +95,10 @@ def update_stock():
             print("\nStock updated successfully!")
 
 def search_product():
-    product_name = input("Enter Product ID/Name: ")
+    product_id_name = input("Enter Product ID/Name: ")
     
     for product_dict in orders:
-        if product_dict["product_name"].lower() == product_name.lower():
+        if product_dict["product_name"].lower() or product_dict["product_id"].lower() == product_id_name.lower():
             print(product_dict)
 
 # Load inventory file
@@ -136,8 +147,9 @@ while True:
     if option == 2:
         product_dict = {}
         product_details = add_product()
-        name, price, quantity = product_details
+        pid, name, price, quantity = product_details
 
+        product_dict["product_id"] = pid
         product_dict["product_name"] = name
         product_dict["product_price"] = price
         product_dict["product_quantity"] = quantity
@@ -148,7 +160,6 @@ while True:
 
     if option == 3:
         update_stock()
-        print(orders)
 
     if option == 4:
         search_product()
