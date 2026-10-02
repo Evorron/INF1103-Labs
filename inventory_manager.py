@@ -13,6 +13,7 @@ def menu_system():
    print("-----------------------------\n")
 
    option = input("Enter option: ")
+   print("")
 
    if option.isdigit():
        return int(option)
@@ -22,7 +23,7 @@ def menu_system():
 def add_product():
 # Prompts and retrieves user input
     while True:
-        print("\nAdd New Product")
+        print("Add New Product")
         product_id = input("Product ID (e.g. PXXX): ")
         
         # Checks invalid inputs
@@ -92,13 +93,13 @@ def update_stock():
     product_id_name = input("Enter Product ID/Name: ")
         
     for product_dict in orders:
-        if product_dict["product_name"].lower() or product_dict["product_id"].lower() == product_id_name.lower():
+        if product_dict["product_name"].lower() == product_id_name.lower() or product_dict["product_id"].lower() == product_id_name.lower():
             print("Product Found:")
             print("Name:", product_dict["product_name"])
             print("Current Stock:", product_dict["product_quantity"])
 
             new_quantity = input("\nNew Stock Quantity: ")
-            product_dict["product_quantity"] = new_quantity
+            product_dict["product_quantity"] = int(new_quantity)
 
             print("\nStock updated successfully!")
 
@@ -106,7 +107,7 @@ def search_product():
     product_id_name = input("Enter Product ID/Name: ")
     
     for product_dict in orders:
-        if product_dict["product_name"].lower() or product_dict["product_id"].lower() == product_id_name.lower():
+        if product_dict["product_name"].lower() == product_id_name.lower() or product_dict["product_id"].lower() == product_id_name.lower():
             print("Product Found")
             print("------------------------------------------------")
             print(f"ID: {product_dict["product_id"]}")
@@ -170,7 +171,7 @@ while True:
         product_dict["product_quantity"] = quantity
         orders.append(product_dict)
 
-        print("Product added successfully")
+        print("\nProduct added successfully!")
 
     if option == 3:
         update_stock()
