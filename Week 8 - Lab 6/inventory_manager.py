@@ -1,6 +1,19 @@
 # Imports
 import json
 
+class Product:
+
+    def __init__(self, id, name, price, quantity):
+        self.__id = id
+        self.__name = name
+        self.__price = price
+        self.__quantity = quantity
+
+    def update_stock(self, new_quantity):
+        if new_quantity >= 0:
+            self.__quantity = new_quantity
+
+
 # Menu
 def menu_system():
    print("\n----------- MENU -----------")
