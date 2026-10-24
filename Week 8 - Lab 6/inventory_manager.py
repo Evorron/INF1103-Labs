@@ -13,6 +13,9 @@ class Product:
         if new_quantity >= 0:
             self.__quantity = new_quantity
 
+    def display_information(self):
+        print(f"ID: {self.__id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__quantity}")
+
 class Inventory():
 
     def __init__(self):
@@ -26,7 +29,7 @@ class Inventory():
         print("------------------------------------------------")
     
         for product in self.__inventory:
-            print(f"ID: {product['product_id']} | Name: {product['product_name']} | Price: ${product['product_price']:.2f} | Stock: {product['product_quantity']}")
+            product.display_information()
     
         print("------------------------------------------------")
 
