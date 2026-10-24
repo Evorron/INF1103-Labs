@@ -13,6 +13,15 @@ class Product:
         if new_quantity >= 0:
             self.__quantity = new_quantity
 
+class Inventory():
+
+    def __init__(self):
+        self.__inventory = []       #Empty inventory attribute
+
+    def add_product(self, product):
+        self.__inventory.append(product)
+
+
 
 # Menu
 def menu_system():
