@@ -21,6 +21,17 @@ class Inventory():
     def add_product(self, product):
         self.__inventory.append(product)
 
+    def display_all(self):
+        print("Current Inventory")
+        print("------------------------------------------------")
+    
+        for product in self.__inventory:
+            print(f"ID: {product['product_id']} | Name: {product['product_name']} | Price: ${product['product_price']:.2f} | Stock: {product['product_quantity']}")
+    
+        print("------------------------------------------------")
+
+    # Getter method for inventory object
+
 
 
 # Menu
@@ -41,15 +52,6 @@ def menu_system():
        return int(option)
    else:
        print("Enter a valid option")
-
-def display_all():
-    print("Current Inventory")
-    print("------------------------------------------------")
-
-    for product in orders:
-        print(f"ID: {product['product_id']} | Name: {product['product_name']} | Price: ${product['product_price']:.2f} | Stock: {product['product_quantity']}")
-
-    print("------------------------------------------------")
 
 def add_product():
 # Prompts and retrieves user input
@@ -118,7 +120,7 @@ def add_product():
             print("------------------")
             continue
         else:
-            return product_id, product_name, price_float, int(quantity_amt)
+            return Product(product_id, product_name, price_float, int(quantity_amt))
 
 def update_stock():
     print("Update Stock")
@@ -189,7 +191,7 @@ def load_inventory():
 
         
 
-orders = []
+orders = Inventory()
 
 print("========================================")
 print("INVENTORY MANAGEMENT SYSTEM")
@@ -206,16 +208,9 @@ while True:
         display_all()
 
     if option == 2:
-        product_dict = {}
         product_details = add_product()
-        pid, name, price, quantity = product_details
-
-        product_dict["product_id"] = pid
-        product_dict["product_name"] = name
-        product_dict["product_price"] = price
-        product_dict["product_quantity"] = quantity
-        orders.append(product_dict)
-
+        orders.add_product(product_details)
+        
         print("\nProduct added successfully!")
 
     if option == 3:
