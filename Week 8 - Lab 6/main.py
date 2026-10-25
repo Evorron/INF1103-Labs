@@ -2,7 +2,7 @@
 import json
 
 from product_module import Product
-from Inventory_module import Inventory
+from inventory_module import Inventory
 from file_handler_module import load_inventory, save_inventory
 
 # Menu
@@ -129,15 +129,13 @@ def search_product():
     print(f"Stock: {product.get_quantity()}")
     print("------------------------------------------------")
 
+# Instanitate Inventory object 
 orders = Inventory()
 
 print("========================================")
 print("INVENTORY MANAGEMENT SYSTEM")
 print("========================================\n")
-saved_data = load_inventory()
-
-if saved_data:
-    orders = saved_data
+load_inventory(orders)
 
 while True:
     option = menu_system()
@@ -159,12 +157,12 @@ while True:
 
     if option == 5:
         print("Saving inventory...")
-        save_inventory()
+        save_inventory(orders)
         print("Inventory saved successfully to \"inventory.json\"")
 
     if option == 6:
         print("Saving inventory before exit...")
-        save_inventory()
+        save_inventory(orders)
         print("Inventory saved successfully.\n")
         print("Thank you for using Inventory Management System.")
         print("Program terminated.")
