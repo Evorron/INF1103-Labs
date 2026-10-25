@@ -16,13 +16,42 @@ class Product:
     def display_information(self):
         print(f"ID: {self.__id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__quantity}")
 
+    # Getter method to retrieve product details
+    def get_id(self):
+        return self.__id
+
+    def get_name(self):
+        return self.__name
+
+    def get_price(self):
+        return self.__price
+
+    def get_quantity(self):
+        return self.__quantity
+
 class Inventory():
 
     def __init__(self):
-        self.__inventory = []       #Empty inventory attribute
+        self.__inventory = []       #Empty inventory list attribute
 
     def add_product(self, product):
         self.__inventory.append(product)
+
+    def search_product(self, product_id_name):
+        for product in self.__inventory:
+            if product.get_name().lower() == product_id_name.lower() or product.get_id().lower() == product_id_name.lower():
+                print("\nProduct Found")
+                print("------------------------------------------------")
+                print(f"ID: {product.get_id()}")
+                print(f"Name: {product.get_name()}")
+                print(f"Price: ${product.get_price():.2f}")
+                print(f"Stock: {product.get_quantity()}")
+                print("------------------------------------------------")
+    
+                return 
+            
+        print("\nProduct not found.")
+
 
     def display_all(self):
         print("Current Inventory")
@@ -33,8 +62,9 @@ class Inventory():
     
         print("------------------------------------------------")
 
-    # Getter method for inventory object
-
+    # Getter method for list
+    def get_inventory(self):
+        return self.__inventory
 
 
 # Menu
@@ -146,21 +176,7 @@ def update_stock():
 def search_product():
     print("Search Product")
     product_id_name = input("Enter Product ID/Name: ")
-    
-    for product_dict in orders:
-        if product_dict["product_name"].lower() == product_id_name.lower() or product_dict["product_id"].lower() == product_id_name.lower():
-            print("\nProduct Found")
-            print("------------------------------------------------")
-            print(f"ID: {product_dict['product_id']}")
-            print(f"Name: {product_dict['product_name']}")
-            print(f"Price: ${product_dict['product_price']:.2f}")
-            print("Stock:", product_dict['product_quantity'])
-            print("------------------------------------------------")
-
-            return 
-        
-    print("\nProduct not found.")
-            
+    orders.search_product(product_id_name)
 
 def save_inventory():
     inventory_file = "inventory.json"
