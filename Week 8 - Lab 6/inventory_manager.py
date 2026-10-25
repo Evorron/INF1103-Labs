@@ -41,17 +41,8 @@ class Inventory():
         for product in self.__inventory:
             if product.get_name().lower() == product_id_name.lower() or product.get_id().lower() == product_id_name.lower():
                 print("\nProduct Found")
-                print("------------------------------------------------")
-                print(f"ID: {product.get_id()}")
-                print(f"Name: {product.get_name()}")
-                print(f"Price: ${product.get_price():.2f}")
-                print(f"Stock: {product.get_quantity()}")
-                print("------------------------------------------------")
     
-                return 
-            
-        print("\nProduct not found.")
-
+                return product    
 
     def display_all(self):
         print("Current Inventory")
@@ -158,17 +149,19 @@ def add_product():
 def update_stock():
     print("Update Stock")
     product_id_name = input("Enter Product ID/Name: ")
-        
-    for product_dict in orders:
-        if product_dict["product_name"].lower() == product_id_name.lower() or product_dict["product_id"].lower() == product_id_name.lower():
-            print("\nProduct Found:")
-            print("Name:", product_dict["product_name"])
-            print("Current Stock:", product_dict["product_quantity"])
+    product = orders.search_product(product_id_name)
 
-            new_quantity = input("\nNew Stock Quantity: ")
-            product_dict["product_quantity"] = int(new_quantity)
+    if product is None:
+            print("Product not Found")
+            return
+    
+    print("Name:", product.get_name())
+    print("Current Stock:", product.get_quantity())
 
-            print("\nStock updated successfully!")
+    new_quantity = input("\nNew Stock Quantity: ")
+    product.update_stock(int(new_quantity))
+
+    print("\nStock updated successfully!")
 
         
     print("Product ")
@@ -176,7 +169,18 @@ def update_stock():
 def search_product():
     print("Search Product")
     product_id_name = input("Enter Product ID/Name: ")
-    orders.search_product(product_id_name)
+    product = orders.search_product(product_id_name)
+
+    if product is None:
+        print("Product not Found")
+        return
+
+    print("------------------------------------------------")
+    print(f"ID: {product.get_id()}")
+    print(f"Name: {product.get_name()}")
+    print(f"Price: ${product.get_price():.2f}")
+    print(f"Stock: {product.get_quantity()}")
+    print("------------------------------------------------")
 
 def save_inventory():
     inventory_file = "inventory.json"
@@ -224,7 +228,7 @@ while True:
     option = menu_system()
 
     if option == 1:
-        display_all()
+        orders.display_all()
 
     if option == 2:
         product_details = add_product()
