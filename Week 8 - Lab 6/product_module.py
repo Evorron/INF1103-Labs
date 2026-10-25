@@ -1,0 +1,27 @@
+class Product:
+
+    def __init__(self, id, name, price, quantity):
+        self.__id = id
+        self.__name = name
+        self.__price = price
+        self.__quantity = quantity
+
+    def update_stock(self, new_quantity):
+        if new_quantity >= 0:
+            self.__quantity = new_quantity
+
+    def display_information(self):
+        print(f"ID: {self.__id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__quantity}")
+
+    # Getter method to retrieve product details
+    def get_id(self):
+        return self.__id
+
+    def get_name(self):
+        return self.__name
+
+    def get_price(self):
+        return self.__price
+
+    def get_quantity(self):
+        return self.__quantity
