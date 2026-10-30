@@ -31,7 +31,16 @@ class Product(ABC):
     def get_quantity(self):
         return self.__quantity
 
-class PhysicalProduct(Product):
+# Interface 
+class CanBeShipped(ABC):
+    @abstractmethod
+    def calculate_shipping_cost(self):
+        """
+        Child Classes created must override this method
+        """
+        pass
+
+class PhysicalProduct(Product, CanBeShipped):
     def __init__(self, id, name, price, quantity, weight):
         super().__init__(id, name, price, quantity)
         self.__weight = weight
@@ -44,6 +53,9 @@ class PhysicalProduct(Product):
     def get_fulfilment_info(self):
         print("This product requires physical shipping")
 
+    def calculate_shipping_cost(self):
+        return (self.__weight * 2.00) + (self.get_price() * 0.01)
+
 class DigitalProduct(Product):
     def __init__(self, id, name, price, quantity, download_size):
         super().__init__(id, name, price, quantity)
@@ -55,19 +67,9 @@ class DigitalProduct(Product):
         print(f" | Download Size: {self.__download_size}")
 
     def get_fulfilment_info(self):
-            print("This product requires physical shipping")
+            print("This product is delivered digitally via download")
 
-# Interface 
-class CanBeShipped(ABC):
-    @abstractmethod
-    def calculate_shipping_cost(self):
-        """
-        Child Classes created must override this method
-        """
-        pass
-
-physical = PhysicalProduct("P100", "Mouse", 150, 10, 10)
+physical = PhysicalProduct("P100", "Mouse", 150, 10, 50)
 digital = DigitalProduct("P101", "MS", 80, 1000, 2500)
 
-physical.display_information()
-digital.display_information()
+print(physical.calculate_shipping_cost())
