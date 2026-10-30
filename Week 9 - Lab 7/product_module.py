@@ -57,6 +57,15 @@ class DigitalProduct(Product):
     def get_fulfilment_info(self):
             print("This product requires physical shipping")
 
+# Interface 
+class CanBeShipped(ABC):
+    @abstractmethod
+    def calculate_shipping_cost(self):
+        """
+        Child Classes created must override this method
+        """
+        pass
+
 physical = PhysicalProduct("P100", "Mouse", 150, 10, 10)
 digital = DigitalProduct("P101", "MS", 80, 1000, 2500)
 
