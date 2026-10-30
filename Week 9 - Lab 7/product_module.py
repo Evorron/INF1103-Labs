@@ -48,7 +48,7 @@ class PhysicalProduct(Product, CanBeShipped):
     # Overwrites Product method display_information()
     def display_information(self):
         super().display_information()
-        print(f" | Weight: {self.__weight}")
+        print(f" | Weight(kg): {self.__weight}")
 
     def get_fulfilment_info(self):
         print("This product requires physical shipping")
@@ -70,7 +70,7 @@ class DigitalProduct(Product):
     # Overwrites Product method display_information()
     def display_information(self):
         super().display_information()
-        print(f" | Download Size: {self.__download_size}")
+        print(f" | Download Size(Gb): {self.__download_size}")
 
     def get_fulfilment_info(self):
             print("This product is delivered digitally via download")
