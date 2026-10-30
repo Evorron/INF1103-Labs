@@ -56,6 +56,12 @@ class PhysicalProduct(Product, CanBeShipped):
     def calculate_shipping_cost(self):
         return (self.__weight * 2.00) + (self.get_price() * 0.01)
 
+    def get_type(self):
+        return "Physical"
+
+    def get_add_info(self):
+        return self.__weight
+
 class DigitalProduct(Product):
     def __init__(self, id, name, price, quantity, download_size):
         super().__init__(id, name, price, quantity)
@@ -68,3 +74,9 @@ class DigitalProduct(Product):
 
     def get_fulfilment_info(self):
             print("This product is delivered digitally via download")
+
+    def get_type(self):
+        return "Digital"
+
+    def get_add_info(self):
+        return self.__download_size
