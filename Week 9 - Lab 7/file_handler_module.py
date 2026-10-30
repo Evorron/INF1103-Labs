@@ -1,7 +1,7 @@
 import json
 
 from inventory_module import Inventory
-from product_module import Product
+from product_module import Product, PhysicalProduct, DigitalProduct
 
 inventory_file = "inventory.json"
 
@@ -11,10 +11,12 @@ def save_inventory(inventory):
 
     for product in inventory.get_inventory():
         add_data.append({
+        "product_type": product.get_type(),
         "product_id": product.get_id(),
         "product_name": product.get_name(),
         "product_price": product.get_price(),
         "product_quantity": product.get_quantity(),
+        "product_add_info": product.get_add_info()
         })
 
     with open(inventory_file, "w") as json_file:
@@ -34,8 +36,13 @@ def load_inventory(orders):
 
             # iterate through file, load each dictionary pairs
             for item in data:
-                product = Product(item["product_id"], item["product_name"], item["product_price"], item["product_quantity"])
-                orders.add_product(product)
+                if item["product_type"] == "Physical":
+                    product = PhysicalProduct(item["product_id"], item["product_name"], item["product_price"], item["product_quantity"], item["product_add_info"])
+                    orders.add_product(product)
+
+                elif item["product_type"] == "Digital":
+                    product = DigitalProduct(item["product_id"], item["product_name"], item["product_price"], item["product_quantity"], item["product_add_info"])
+                    orders.add_product(product)
 
         return data
 

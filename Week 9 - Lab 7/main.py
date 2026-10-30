@@ -140,9 +140,6 @@ def update_stock():
             break
         print("ERROR: Enter a valid non-negative integer")
 
-        
-    print("Product ")
-
 def search_product():
     print("Search Product")
     product_id_name = input("Enter Product ID/Name: ")
