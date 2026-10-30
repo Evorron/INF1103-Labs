@@ -173,6 +173,9 @@ while True:
     if option == 2:
         product_details = add_product()
         orders.add_product(product_details)
+
+        if isinstance(product_details, PhysicalProduct):
+            print(f"Product shipping cost: ${product_details.calculate_shipping_cost()}")
         
         print("\nProduct added successfully!")
 
