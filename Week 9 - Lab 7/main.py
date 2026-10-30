@@ -115,7 +115,7 @@ def add_product():
 
         else:
             product_size = float(input("Product Download Size(Gb): "))
-            if product_size <= 0 or product_weight == "":
+            if product_size <= 0 or product_size == "":
                             print("ERROR: Size must be greater than 0")
             return DigitalProduct(product_id, product_name, price_float, int(quantity_amt), product_size)
     
@@ -132,10 +132,13 @@ def update_stock():
     print("Name:", product.get_name())
     print("Current Stock:", product.get_quantity())
 
-    new_quantity = input("\nNew Stock Quantity: ")
-    product.update_stock(int(new_quantity))
-
-    print("\nStock updated successfully!")
+    while True:
+        new_quantity = input("\nNew Stock Quantity: ")
+        if new_quantity.isdigit() and int(new_quantity) >= 0: 
+            product.update_stock(int(new_quantity))
+            print("\nStock updated successfully!")
+            break
+        print("ERROR: Enter a valid non-negative integer")
 
         
     print("Product ")
