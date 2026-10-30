@@ -25,3 +25,13 @@ class Product:
 
     def get_quantity(self):
         return self.__quantity
+
+
+class PhysicalProduct(Product):
+    def __init__(self, id, name, price, quantity, weight):
+        super().__init__(id, name, price, quantity)
+        self.__weight = weight
+
+    def display_information(self):
+                print(f"ID: {self.__id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__quantity} | Weight: {self.__weight}")
+
