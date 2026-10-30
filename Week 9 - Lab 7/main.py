@@ -1,7 +1,7 @@
 # Imports
 import json
 
-from product_module import Product
+from product_module import Product, PhysicalProduct, DigitalProduct
 from inventory_module import Inventory
 from file_handler_module import load_inventory, save_inventory
 
@@ -28,6 +28,20 @@ def add_product():
 # Prompts and retrieves user input
     while True:
         print("Add New Product")
+        # Checks for invalid product type
+        product_type = input("Is this a Physical or Digital product? (P/D): ")
+        if product_type.isdigit() or product_type == "":
+            print("ERROR: Specify if it's a Physical or Digital product.")
+            print("------------------")
+            continue
+
+        if product_type.lower() != "p" and product_type.lower() != "d":
+            print("ERROR: Specify if it's a Physical or Digital product.")
+            print("------------------")
+            continue
+        break
+
+    while True:
         product_id = input("Product ID (e.g. PXXX): ")
         
         # Checks invalid inputs
@@ -40,7 +54,6 @@ def add_product():
             print("ERROR: Enter a valid ID format (e.g. PXXX)")
             print("------------------")
             continue
-
         break
 
     while True:
@@ -90,8 +103,18 @@ def add_product():
             print("ERROR: Only positive numbers are allowed")
             print("------------------")
             continue
-        else:
-            return Product(product_id, product_name, price_float, int(quantity_amt))
+        break
+
+    while True:
+        if product_type.lower() == "p":
+            product_weight = input("Product Weight(kg): ")
+            new_product = PhysicalProduct(product_id, product_name, price_float, int(quantity_amt), product_weight)
+
+        if product_type.lower() == "d":
+            product_size = input("Product Download Size(Gb): ")
+            new_product = DigitalProduct(product_id, product_name, price_float, int(quantity_amt), product_size)
+    
+        return new_product
 
 def update_stock():
     print("Update Stock")

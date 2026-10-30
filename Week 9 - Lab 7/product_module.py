@@ -68,8 +68,3 @@ class DigitalProduct(Product):
 
     def get_fulfilment_info(self):
             print("This product is delivered digitally via download")
-
-physical = PhysicalProduct("P100", "Mouse", 150, 10, 50)
-digital = DigitalProduct("P101", "MS", 80, 1000, 2500)
-
-print(physical.calculate_shipping_cost())
