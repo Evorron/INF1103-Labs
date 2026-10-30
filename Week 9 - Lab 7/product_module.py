@@ -1,10 +1,15 @@
-class Product:
+from abc import ABC, abstractmethod
 
+class Product(ABC):
     def __init__(self, id, name, price, quantity):
         self.__id = id
         self.__name = name
         self.__price = price
         self.__quantity = quantity
+
+    @abstractmethod
+    def get_fulfilment_info(self):
+         pass
 
     def update_stock(self, new_quantity):
         if new_quantity >= 0:
@@ -26,7 +31,6 @@ class Product:
     def get_quantity(self):
         return self.__quantity
 
-
 class PhysicalProduct(Product):
     def __init__(self, id, name, price, quantity, weight):
         super().__init__(id, name, price, quantity)
@@ -34,8 +38,11 @@ class PhysicalProduct(Product):
 
     # Overwrites Product method display_information()
     def display_information(self):
-            super().display_information()
-            print(f" | Weight: {self.__weight}")
+        super().display_information()
+        print(f" | Weight: {self.__weight}")
+
+    def get_fulfilment_info(self):
+        print("This product requires physical shipping")
 
 class DigitalProduct(Product):
     def __init__(self, id, name, price, quantity, download_size):
@@ -44,9 +51,11 @@ class DigitalProduct(Product):
 
     # Overwrites Product method display_information()
     def display_information(self):
-            super().display_information()
-            print(f" | Download Size: {self.__download_size}")
+        super().display_information()
+        print(f" | Download Size: {self.__download_size}")
 
+    def get_fulfilment_info(self):
+            print("This product requires physical shipping")
 
 physical = PhysicalProduct("P100", "Mouse", 150, 10, 10)
 digital = DigitalProduct("P101", "MS", 80, 1000, 2500)
