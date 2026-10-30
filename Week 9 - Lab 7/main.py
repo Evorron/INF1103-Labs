@@ -107,14 +107,18 @@ def add_product():
 
     while True:
         if product_type.lower() == "p":
-            product_weight = input("Product Weight(kg): ")
-            new_product = PhysicalProduct(product_id, product_name, price_float, int(quantity_amt), product_weight)
+            product_weight = float(input("Product Weight(kg): "))
+            if product_weight <= 0 or product_weight == "":
+                print("ERROR: Weight must be greater than 0")
+                continue
+            return PhysicalProduct(product_id, product_name, price_float, int(quantity_amt), product_weight)
 
-        if product_type.lower() == "d":
-            product_size = input("Product Download Size(Gb): ")
-            new_product = DigitalProduct(product_id, product_name, price_float, int(quantity_amt), product_size)
+        else:
+            product_size = float(input("Product Download Size(Gb): "))
+            if product_size <= 0 or product_weight == "":
+                            print("ERROR: Size must be greater than 0")
+            return DigitalProduct(product_id, product_name, price_float, int(quantity_amt), product_size)
     
-        return new_product
 
 def update_stock():
     print("Update Stock")
