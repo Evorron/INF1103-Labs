@@ -32,6 +32,15 @@ class PhysicalProduct(Product):
         super().__init__(id, name, price, quantity)
         self.__weight = weight
 
+    # Overwrites Product method display_information()
     def display_information(self):
                 print(f"ID: {self.__id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__quantity} | Weight: {self.__weight}")
 
+class DigitalProduct(Product):
+    def __init__(self, id, name, price, quantity, download_size):
+        super().__init__(id, name, price, quantity)
+        self.__download_size = download_size
+
+    # Overwrites Product method display_information()
+    def display_information(self):
+                    print(f"ID: {self.__id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__quantity} | Download Size: {self.__download_size}")
