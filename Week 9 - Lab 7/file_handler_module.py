@@ -1,7 +1,7 @@
 import json
 
-from inventory_module import Inventory
-from product_module import Product, PhysicalProduct, DigitalProduct
+from Inventory import Inventory
+from Product import Product, PhysicalProduct, DigitalProduct
 
 inventory_file = "inventory.json"
 
