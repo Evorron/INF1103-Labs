@@ -1,0 +1,82 @@
+from abc import ABC, abstractmethod
+
+class Product(ABC):
+    def __init__(self, id, name, price, quantity):
+        self.__id = id
+        self.__name = name
+        self.__price = price
+        self.__quantity = quantity
+
+    @abstractmethod
+    def get_fulfilment_info(self):
+         pass
+
+    def update_stock(self, new_quantity):
+        if new_quantity >= 0:
+            self.__quantity = new_quantity
+
+    def display_information(self):
+        print(f"ID: {self.__id} | Name: {self.__name} | Price: ${self.__price:.2f} | Stock: {self.__quantity}", end="")
+
+    # Getter method to retrieve product details
+    def get_id(self):
+        return self.__id
+
+    def get_name(self):
+        return self.__name
+
+    def get_price(self):
+        return self.__price
+
+    def get_quantity(self):
+        return self.__quantity
+
+# Interface 
+class CanBeShipped(ABC):
+    @abstractmethod
+    def calculate_shipping_cost(self):
+        """
+        Child Classes created must override this method
+        """
+        pass
+
+class PhysicalProduct(Product, CanBeShipped):
+    def __init__(self, id, name, price, quantity, weight):
+        super().__init__(id, name, price, quantity)
+        self.__weight = weight
+
+    # Overwrites Product method display_information()
+    def display_information(self):
+        super().display_information()
+        print(f" | Weight(kg): {self.__weight}")
+
+    def get_fulfilment_info(self):
+        print("This product requires physical shipping")
+
+    def calculate_shipping_cost(self):
+        return (self.__weight * 2.00) + (self.get_price() * 0.01)
+
+    def get_type(self):
+        return "Physical"
+
+    def get_add_info(self):
+        return self.__weight
+
+class DigitalProduct(Product):
+    def __init__(self, id, name, price, quantity, download_size):
+        super().__init__(id, name, price, quantity)
+        self.__download_size = download_size
+
+    # Overwrites Product method display_information()
+    def display_information(self):
+        super().display_information()
+        print(f" | Download Size(Gb): {self.__download_size}")
+
+    def get_fulfilment_info(self):
+            print("This product is delivered digitally via download")
+
+    def get_type(self):
+        return "Digital"
+
+    def get_add_info(self):
+        return self.__download_size
