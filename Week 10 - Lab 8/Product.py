@@ -1,11 +1,13 @@
 from abc import ABC, abstractmethod
+from Supplier import Supplier
 
 class Product(ABC):
-    def __init__(self, id, name, price, quantity):
+    def __init__(self, id: str, name: str, price: float, quantity: int, supplier: Supplier):
         self.__id = id
         self.__name = name
         self.__price = price
         self.__quantity = quantity
+        self.supplier: Supplier = supplier
 
     @abstractmethod
     def get_fulfilment_info(self):
@@ -41,8 +43,8 @@ class CanBeShipped(ABC):
         pass
 
 class PhysicalProduct(Product, CanBeShipped):
-    def __init__(self, id, name, price, quantity, weight):
-        super().__init__(id, name, price, quantity)
+    def __init__(self, id: str, name: str, price: float, quantity: int, weight: float, supplier: Supplier):
+        super().__init__(id, name, price, quantity, supplier)
         self.__weight = weight
 
     # Overwrites Product method display_information()
@@ -63,8 +65,8 @@ class PhysicalProduct(Product, CanBeShipped):
         return self.__weight
 
 class DigitalProduct(Product):
-    def __init__(self, id, name, price, quantity, download_size):
-        super().__init__(id, name, price, quantity)
+    def __init__(self, id, name: str, price: float, quantity: int, download_size: float, supplier: Supplier):
+        super().__init__(id, name, price, quantity, supplier)
         self.__download_size = download_size
 
     # Overwrites Product method display_information()
@@ -80,3 +82,10 @@ class DigitalProduct(Product):
 
     def get_add_info(self):
         return self.__download_size
+
+sup = Supplier("A100", "Test Sup", "test@email.com")
+
+physical = PhysicalProduct("P100", "Test", 100, 10, 45.6, sup)
+
+physical.supplier.display_information()
+physical.display_information()
