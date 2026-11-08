@@ -1,14 +1,13 @@
 from product import Product
 
 class Inventory():
-
     def __init__(self):
         self.__inventory: list[Product] = []       #Empty inventory list attribute
 
-    def add_product(self, product: Product):
+    def add_product(self, product: Product) -> None:
         self.__inventory.append(product)
 
-    def remove_product(self, product_id_name: str):
+    def remove_product(self, product_id_name: str) -> None:
         for product in self.__inventory:
             if product.get_name().lower() == product_id_name.lower() or product.get_id().lower() == product_id_name.lower():
                 self.__inventory.remove(product)
@@ -20,8 +19,9 @@ class Inventory():
                 print("\nProduct Found")
     
                 return product
+            return None
 
-    def display_all(self):
+    def display_all(self) -> None:
         print("Current Inventory")
         print("------------------------------------------------")
     
@@ -31,5 +31,5 @@ class Inventory():
         print("------------------------------------------------")
 
     # Getter method for list
-    def get_inventory(self):
+    def get_inventory(self) -> list[Product]:
         return self.__inventory

@@ -4,7 +4,7 @@ from supplier import Supplier
 class OrderLine:
     def __init__(self, product: Product, quantity: int):
         self.product: Product = product
-        self.quantity = quantity
+        self.quantity: int = quantity
 
     def calculate_subtotal(self) -> float:
         return self.product.get_price() * self.quantity
@@ -23,4 +23,4 @@ class Order:
         for order_line in self.order_lines:
             total_value += order_line.calculate_subtotal()
         
-        print(total_value)
+        return total_value
