@@ -1,8 +1,8 @@
 # Imports
 import json
 
-from Product import Product, PhysicalProduct, DigitalProduct
-from Inventory import Inventory
+from product import Product, PhysicalProduct, DigitalProduct
+from inventory import Inventory
 from file_handler_module import load_inventory, save_inventory
 
 # Menu
