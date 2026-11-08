@@ -1,5 +1,4 @@
-from product import Product, PhysicalProduct, DigitalProduct
-from supplier import Supplier
+from product import Product
 
 class OrderLine:
     def __init__(self, product: Product, quantity: int):
@@ -21,6 +20,7 @@ class Order:
     def calculate_total(self) -> float:
         total_value = 0.0
         for order_line in self.order_lines:
+            print(f"Product: {order_line.product.get_name()} | Quantity: {order_line.quantity}")
             total_value += order_line.calculate_subtotal()
         
         return total_value

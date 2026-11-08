@@ -19,7 +19,7 @@ class Inventory():
                 print("\nProduct Found")
     
                 return product
-            return None
+        return None
 
     def display_all(self) -> None:
         print("Current Inventory")
@@ -30,6 +30,13 @@ class Inventory():
     
         print("------------------------------------------------")
 
+    # Test function
+    def show_product_details(self, product: Product) -> None:
+        product.display_information()
+        product.get_fulfilment_info()
+
+
     # Getter method for list
     def get_inventory(self) -> list[Product]:
         return self.__inventory
+

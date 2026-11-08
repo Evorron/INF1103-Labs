@@ -13,7 +13,7 @@ class Product(ABC):
     def get_fulfilment_info(self) -> None:
          pass
 
-    def update_stock(self, new_quantity) -> None:
+    def update_stock(self, new_quantity: int) -> None:
         if new_quantity >= 0:
             self.__quantity = new_quantity
 
@@ -65,7 +65,7 @@ class PhysicalProduct(Product, CanBeShipped):
         return self.__weight
 
 class DigitalProduct(Product):
-    def __init__(self, id, name: str, price: float, quantity: int, download_size: float, supplier: Supplier):
+    def __init__(self, id: str, name: str, price: float, quantity: int, download_size: float, supplier: Supplier):
         super().__init__(id, name, price, quantity, supplier)
         self.__download_size = download_size
 
